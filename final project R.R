@@ -30,15 +30,15 @@ str(df)
 
 
 
-# 1. Which video game platform is most successful, in terms of the game bases and NA sales?  (bar(uptodtae sum total))
+# 1 Grace. Which video game platform is most successful, in terms of the game bases and NA sales?  (bar(uptodtae sum total))
 
 
 
-# 2. And which platform would we recommend based on the trend? （timeseries line chart; looking for trends） 
+# 2 Grace. And which platform would we recommend based on the trend? （timeseries line chart; looking for trends） 
 
 
 
-# 3. How is genre preference (user_score) in North America (x: genre; y: avg user score; bar/heatmap) ?  
+# 3 Andy. How is genre preference (user_score) in North America (x: genre; y: avg user score; bar/heatmap) ?  
 
 
 
@@ -46,7 +46,7 @@ str(df)
 
 
 
-# 5. Relationship between us sales and global sales (scatter plot)
+# 5 Andy. Relationship between us sales and global sales (scatter plot)
 
 
 
