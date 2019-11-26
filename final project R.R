@@ -3,6 +3,10 @@ rm(list = ls())
 #url<-""
 #download.file(url,"Video_Games_Sales_as_at_22_Dec_2016.csv")
 
+#library(readr)
+#library(ggplot2)
+#library(ggpubr)
+
 my_col_types <-
   cols(
     Name = col_character(),
@@ -38,17 +42,24 @@ str(df)
 
 
 
-# 3 Andy. How is genre preference (user_score) in North America (x: genre; y: avg user score; bar/heatmap) ?  
+# 3 Andy. How is genre preference in North America vs global preference ?  
 
-
+qplot(Genre,NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
+qplot(Genre,Global_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
 
 # 4. What are the top 10 video game publisher (intelligent property: based on ratings and sales) in the North America market (x: publisher , y: sales; bar chart)
 
 
 
-# 5 Andy. Relationship between us sales and global sales (scatter plot)
+# 5 Andy. Relationship between us sales and the reset of the world (scatter plot)
 
-
+df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
+ggscatter(df, x = "NA_Sales", y = "NOT_NA_Sales", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson")
+ggscatter(subset(df,NA_Sales<=2 & NOT_NA_Sales<=2), x = "NA_Sales", y = "NOT_NA_Sales", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson")
 
 # 6. How does Genre / platform change in different time period in different region (x: platform y: genre; heat: sale; 4 different region heatmap)
 
