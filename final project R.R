@@ -4,6 +4,7 @@ rm(list = ls())
 #download.file(url,"Video_Games_Sales_as_at_22_Dec_2016.csv")
 
 #library(readr)
+#library(dplyr)
 #library(ggplot2)
 #library(ggpubr)
 
@@ -35,6 +36,8 @@ str(df)
 # Analysis Preparation 
 df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
 
+
+#Data Analysis & Visulization 
 # 1 Grace. Which video game platform is most successful, in terms of the game bases and NA sales?  (bar(uptodtae sum total))
 
 
