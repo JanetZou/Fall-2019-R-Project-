@@ -47,20 +47,28 @@ df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
 
 
 # 3 How is genre preference in North America vs global preference  
-qplot(Genre,NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
-qplot(Genre,NOT_NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
+p3.1<-qplot(Genre,NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
+p3.2<-qplot(Genre,NOT_NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
+ggsave(filename = "p3.1.jpg", plot = p3.1, width = 12, height = 8,
+       units = "in")
+ggsave(filename = "p3.2.jpg", plot = p3.2, width = 12, height = 8,
+       units = "in")
 
 # 4. What are the top 10 video game publisher (intelligent property: based on ratings and sales) in the North America market (x: publisher , y: sales; bar chart)
 
 
 
 # 5 Relationship between us sales and the reset of the world
-ggscatter(df, x = "NA_Sales", y = "NOT_NA_Sales", 
+p5.1<-ggscatter(df, x = "NA_Sales", y = "NOT_NA_Sales", 
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson")
-ggscatter(subset(df,NA_Sales<=2 & NOT_NA_Sales<=2), x = "NA_Sales", y = "NOT_NA_Sales", 
+p5.2<-ggscatter(subset(df,NA_Sales<=2 & NOT_NA_Sales<=2), x = "NA_Sales", y = "NOT_NA_Sales", 
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson")
+ggsave(filename = "p5.1.jpg", plot = p5.1, width = 12, height = 8,
+       units = "in")
+ggsave(filename = "p5.2.jpg", plot = p5.2, width = 12, height = 8,
+       units = "in")
 
 # 6. How does Genre / platform change in different time period in different region (x: platform y: genre; heat: sale; 4 different region heatmap)
 
