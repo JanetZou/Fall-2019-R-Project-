@@ -1,4 +1,4 @@
-
+#Miscellaneous
 rm(list = ls())
 #url<-""
 #download.file(url,"Video_Games_Sales_as_at_22_Dec_2016.csv")
@@ -7,6 +7,7 @@ rm(list = ls())
 #library(ggplot2)
 #library(ggpubr)
 
+#Data Cleaning
 my_col_types <-
   cols(
     Name = col_character(),
@@ -26,13 +27,13 @@ my_col_types <-
     Developer = col_factor(),
     Rating = col_factor()
   )
-
 my_na = c("", "NA", "N/A")
 df <- read_csv("Video_Games_Sales_as_at_22_Dec_2016.csv", col_types = my_col_types, na = my_na)
 df
 str(df)
 
-
+# Analysis Preparation 
+df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
 
 # 1 Grace. Which video game platform is most successful, in terms of the game bases and NA sales?  (bar(uptodtae sum total))
 
@@ -42,16 +43,15 @@ str(df)
 
 
 
-# 3 Andy. How is genre preference in North America vs global preference ?  
+# 3 How is genre preference in North America vs global preference  
 qplot(Genre,NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
-qplot(Genre,Global_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
+qplot(Genre,NOT_NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
 
 # 4. What are the top 10 video game publisher (intelligent property: based on ratings and sales) in the North America market (x: publisher , y: sales; bar chart)
 
 
 
-# 5 Andy. Relationship between us sales and the reset of the world (scatter plot)
-df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
+# 5 Relationship between us sales and the reset of the world
 ggscatter(df, x = "NA_Sales", y = "NOT_NA_Sales", 
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson")
