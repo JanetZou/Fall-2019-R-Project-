@@ -43,7 +43,6 @@ str(df)
 
 
 # 3 Andy. How is genre preference in North America vs global preference ?  
-
 qplot(Genre,NA_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
 qplot(Genre,Global_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", log = "y")
 
@@ -52,7 +51,6 @@ qplot(Genre,Global_Sales, data = subset(df, !is.na(Genre)), geom = "boxplot", lo
 
 
 # 5 Andy. Relationship between us sales and the reset of the world (scatter plot)
-
 df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
 ggscatter(df, x = "NA_Sales", y = "NOT_NA_Sales", 
           add = "reg.line", conf.int = TRUE, 
