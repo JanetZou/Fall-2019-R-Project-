@@ -43,13 +43,22 @@ df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
 suppressPackageStartupMessages(library(ggplot2))
 library(dplyr)
 library(reshape2)
+library(scales)
 
 
 df1 <- group_by(df, Platform)
 summ <- summarize(df1, sum_sales = sum(NA_Sales))
 summ
-summ$sum_sales<-as.numeric(summ$sum_sales)
-qplot(Platform, data = summ, geom = "bar")
+
+q1<- qplot(num_game, sum_sales, data = summ, geom = "point",color = Platform)
+q1 <- q1 + scale_color_hue(name = "Platform")
+q1 <- q1 + scale_x_continuous(name = "Number of Games")
+q1 <- q1 + scale_y_continuous(name = "NA Sales (Millions)", labels = dollar)
+q1 <- q1 + ggtitle("Platform Success")
+q1 <- q1 + theme(plot.title = element_text(size = 24, face = "bold", hjust=0.5),
+                 axis.title = element_text(size = 14))
+q1
+ggsave(filename = "Q1.jpg", plot = q1, width = 12, height = 8, units = "in")
 
 # 2 Grace. And which platform would we recommend based on the trend? （timeseries line chart; looking for trends） 
 
