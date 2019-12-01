@@ -40,7 +40,16 @@ df$NOT_NA_Sales<-df$Global_Sales-df$NA_Sales
 #Data Analysis & Visulization 
 # 1 Grace. Which video game platform is most successful, in terms of the game bases and NA sales?  (bar(uptodtae sum total))
 
+suppressPackageStartupMessages(library(ggplot2))
+library(dplyr)
+library(reshape2)
 
+
+df1 <- group_by(df, Platform)
+summ <- summarize(df1, sum_sales = sum(NA_Sales))
+summ
+summ$sum_sales<-as.numeric(summ$sum_sales)
+qplot(Platform, data = summ, geom = "bar")
 
 # 2 Grace. And which platform would we recommend based on the trend? （timeseries line chart; looking for trends） 
 
