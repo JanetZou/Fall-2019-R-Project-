@@ -94,7 +94,35 @@ ggsave(filename = "p5.2.jpg", plot = p5.2, width = 12, height = 8,
 
 # 7. How does the sales relates to Gener and publishers (heatmap)
 
+df7 <- select(df, Publisher, Genre, NA_Sales, EU_Sales, JP_Sales, Other_Sales, Global_Sales)
 
+# Select and keep only top 10 publishers
+top_10_publishers <- c("Nintendo","Electronic Arts","Activision","Sony Computer Entertainment","Ubisoft",
+                       "Take-Two Interactive","THQ","Microsoft Game Studios","Atari","Sega")
+
+df7 <- filter(df7, Publisher == top_10_publishers)
+
+df7 <- df7[complete.cases(df7), ]
+df7 <- group_by(df7, Publisher, Genre)
+summ7 <- summarize(df7, 
+                   sum_NA_Sales = sum(NA_Sales), 
+                   #sum_EU_Sales = sum(EU_Sales), 
+                   #sum_JP_Sales = sum(JP_Sales), 
+                   #sum_Other_Sales = sum(Other_Sales), 
+                   sum_Global_Sales = sum(Global_Sales)
+                   )
+
+p7.1 <- qplot(Publisher, Genre, data = summ7, geom = "bin2d", fill = sum_NA_Sales)
+p7.1 <- p7.1 + theme(axis.text.x = element_text(angle = 15))
+p7.1 <- p7.1 + theme(panel.grid.major.y = element_blank()) + theme(panel.grid.major.x = element_blank())
+ggsave(filename = "p7.1.jpg", plot = p7.1, width = 12, height = 8,
+       units = "in")
+
+p7.2 <- qplot(Publisher, Genre, data = summ7, geom = "bin2d", fill = sum_Global_Sales)
+p7.2 <- p7.2 + theme(axis.text.x = element_text(angle = 15))
+p7.2 <- p7.2 + theme(panel.grid.major.y = element_blank()) + theme(panel.grid.major.x = element_blank())
+ggsave(filename = "p7.2.jpg", plot = p7.2, width = 12, height = 8,
+       units = "in")
 
 
 
